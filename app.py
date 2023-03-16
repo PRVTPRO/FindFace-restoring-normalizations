@@ -30,7 +30,6 @@ def collector(ip, token, rootdir):
 
         if response.status_code == 200:
             data = response.json()
-            # обрабатываем полученные данные
             if data['next_page'] == None:
                 print(
                     f"[Sourcr] Dossier {dossier_id} count objects face  {data['count']}")
@@ -42,7 +41,6 @@ def collector(ip, token, rootdir):
                     with open(f"{folder_name}/{el['id']}.txt", "w") as outfile:
                         json.dump(el, outfile)
 
-                    # Проверяем, что файл существует и его размер больше нуля
                     if os.path.exists(f"{folder_name}/{el['id']}.txt") and os.stat(f"{folder_name}/{el['id']}.txt").st_size > 0:
                         print(
                             f"{folder_name}/{el['id']}.txt useful data was successfully saved.")
